@@ -8,6 +8,27 @@ import {createStackNavigator} from "@react-navigation/stack";
 
 import LandingScreen from './components/auth/LandingPage'
 
+// imports packages and fucntions from firebase
+import * as firebase from 'firebase'
+// -------------------------------------------------------------------------------------------
+
+// For Firebase JS SDK v7.20.0 and later, measurementId is optional
+const firebaseConfig = {
+  apiKey: "AIzaSyANjOkbe0b8_n8Y4qIzzppjqh5xLjgMBzg",
+  authDomain: "biome-dev.firebaseapp.com",
+  projectId: "biome-dev",
+  storageBucket: "biome-dev.appspot.com",
+  messagingSenderId: "814850657790",
+  appId: "1:814850657790:web:785b1a7d00ca7a022a44af",
+  measurementId: "G-X0KG0VKNFG"
+};
+
+// initialize firebase project
+// makes sure that no firebase instance is running at the moment
+// will crash if another firebase app is running while trying to initialize
+if(firebase.apps.length === 0){
+  firebase.initializeApp(firebaseConfig)
+}
 
 // stack navigator tag for screens
 const Stack = createStackNavigator();
