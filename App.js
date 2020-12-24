@@ -11,7 +11,7 @@ import LandingScreen from './components/auth/LandingPage'
 // imports packages and fucntions from firebase
 import * as firebase from 'firebase'
 // -------------------------------------------------------------------------------------------
-
+// test
 // For Firebase JS SDK v7.20.0 and later, measurementId is optional
 const firebaseConfig = {
   apiKey: "AIzaSyANjOkbe0b8_n8Y4qIzzppjqh5xLjgMBzg",
