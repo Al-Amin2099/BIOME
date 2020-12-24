@@ -1,4 +1,5 @@
-// registering a user to log in to the app
+// logging in to a user's account
+// similar to reistration
 
 import React, { Component } from 'react'
 import {View, Button, TextInput} from 'react-native'
@@ -13,10 +14,9 @@ export class Register extends Component {
         super(props);
 
         this.state = {
-            // parameters needed for new users to register
+            // parameters needed for users to login
             email : '',
             password: '',
-            name: ''
         }
         // binds these variables to onSignUp function
         this.onSignUp = this.onSignUp.bind(this)
@@ -27,7 +27,7 @@ export class Register extends Component {
 
         // grabs variables in state variable 
         const {email, password, name} = this.state;
-        firebase.auth().createUserWithEmailAndPassword(email, password)
+        firebase.auth().signInWithEmailAndPassword(email, password)
             // after getting response from firebase server
             .then((result) => {
                 console.log(result)
@@ -67,4 +67,4 @@ export class Register extends Component {
     }
 }
 
-export default Register
+export default Login

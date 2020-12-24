@@ -7,11 +7,13 @@ import {NavigationContainer} from "@react-navigation/native";
 import {createStackNavigator} from "@react-navigation/stack"; 
 
 import LandingScreen from './components/auth/LandingPage'
+import RegisterScreen from './components/auth/Register'
 
 // imports packages and fucntions from firebase
 import * as firebase from 'firebase'
+
 // -------------------------------------------------------------------------------------------
-// test
+
 // For Firebase JS SDK v7.20.0 and later, measurementId is optional
 const firebaseConfig = {
   apiKey: "AIzaSyANjOkbe0b8_n8Y4qIzzppjqh5xLjgMBzg",
@@ -42,6 +44,7 @@ export default function App() {
       <Stack.Navigator initialRouteName = "Landing">
 
         <Stack.Screen name = "Landing" component = {LandingScreen} options = {{headerShown: false}} />
+        <Stack.Screen name = "Register" component = {RegisterScreen} options = {{headerShown: false}} />
 
       </Stack.Navigator>
 
