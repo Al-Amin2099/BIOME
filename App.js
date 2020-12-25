@@ -1,6 +1,7 @@
 import { StatusBar } from 'expo-status-bar';
-import React from 'react';
+import React, {Components} from 'react';
 import { NativeAppEventEmitter, StyleSheet, Text, View } from 'react-native';
+import {View, Text} from 'react-native'
 
 // main file that contains the routes
 import {NavigationContainer} from "@react-navigation/native"; 
@@ -35,20 +36,70 @@ if(firebase.apps.length === 0){
 // stack navigator tag for screens
 const Stack = createStackNavigator();
 
-export default function App() {
- 
-  return (
-    // navigation container - parent tag for all routes
-    <NavigationContainer> {} 
+export class App extends Component {
+  constructor(props){
+    this.state = {
+      loaded: false,
+    }
+  }
 
-      <Stack.Navigator initialRouteName = "Landing">
+  // called when component actually mounts
+  componentDidMount(){
+    // listening for auth changes
+    firebase.auth().onAuthStateChanged((user) => {
+      // user not loaded and isnt logged in
+      if(!user){
+        this.setState({
+          loggedIn: false,
+          loaded: true,
+        })
+      }
+      else {
+        this.setState({
+          loggedIn: true,
+          loaded: true,
+        })
+      }
+    })
+  }
 
-        <Stack.Screen name = "Landing" component = {LandingScreen} options = {{headerShown: false}} />
-        <Stack.Screen name = "Register" component = {RegisterScreen} options = {{headerShown: false}} />
+  render() {
+    const {loggedIn, loaded} = this.state;
+    if(!loaded){
+      // overides navigation container
+      return(
+        <View style = {{flex: 1, justifyContent: 'center'}}>
+          <Text> Loading </Text>
+        </View>
+      )
+    }
 
-      </Stack.Navigator>
-
-    </NavigationContainer>
+    if(!loggedIn) {
+      return (
+        // navigation container - parent tag for all routes
+        <NavigationContainer> {} 
     
-  );
+          <Stack.Navigator initialRouteName = "Landing">
+    
+            <Stack.Screen name = "Landing" component = {LandingScreen} options = {{headerShown: false}} />
+            <Stack.Screen name = "Register" component = {RegisterScreen} options = {{headerShown: false}} />
+    
+          </Stack.Navigator>
+    
+        </NavigationContainer>
+        
+      );
+    }
+
+    return(
+      <View style = {{flex: 1, justifyContent: 'center'}}>
+        <Text> User is Logged In </Text>
+      </View>
+    )
+
+  }
 }
+
+export default App
+
+// add firebase auth state listener
