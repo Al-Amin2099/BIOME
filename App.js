@@ -1,7 +1,6 @@
-import { StatusBar } from 'expo-status-bar';
-import React, {Components} from 'react';
-import { NativeAppEventEmitter, StyleSheet, Text, View } from 'react-native';
-import {View, Text} from 'react-native'
+import {StatusBar} from 'expo-status-bar';
+import React, {Component} from 'react';
+import {Text, View} from 'react-native';
 
 // main file that contains the routes
 import {NavigationContainer} from "@react-navigation/native"; 
@@ -38,6 +37,7 @@ const Stack = createStackNavigator();
 
 export class App extends Component {
   constructor(props){
+    super(props);
     this.state = {
       loaded: false,
     }
