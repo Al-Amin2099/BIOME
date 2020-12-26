@@ -12,7 +12,16 @@ import RegisterScreen from './components/auth/Register'
 // imports packages and fucntions from firebase
 import * as firebase from 'firebase'
 
+// importing redux and everything that requires redux
+import {Provider} from 'react-dredux'
+import {createStore, applyMiddleware} from 'redux'
+import rootReducer from './redux/reducers'
+import thunk from 'redux-thunk'
+import MainScreen from './components/Main'
+
 // -------------------------------------------------------------------------------------------
+
+const store = createStroe(rootReducer, applyMiddleware(thunk))
 
 // For Firebase JS SDK v7.20.0 and later, measurementId is optional
 const firebaseConfig = {
@@ -92,9 +101,9 @@ export class App extends Component {
     }
 
     return(
-      <View style = {{flex: 1, justifyContent: 'center'}}>
-        <Text> User is Logged In </Text>
-      </View>
+      <Provider store = {store}>
+        <MainScreen/>
+      </Provider>
     )
 
   }
