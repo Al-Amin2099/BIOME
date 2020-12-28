@@ -13,7 +13,7 @@ import RegisterScreen from './components/auth/Register'
 import * as firebase from 'firebase'
 
 // importing redux and everything that requires redux
-import {Provider} from 'react-dredux'
+import {Provider} from 'react-redux'
 import {createStore, applyMiddleware} from 'redux'
 import rootReducer from './redux/reducers'
 import thunk from 'redux-thunk'
@@ -21,7 +21,7 @@ import MainScreen from './components/Main'
 
 // -------------------------------------------------------------------------------------------
 
-const store = createStroe(rootReducer, applyMiddleware(thunk))
+const store = createStore(rootReducer, applyMiddleware(thunk))
 
 // For Firebase JS SDK v7.20.0 and later, measurementId is optional
 const firebaseConfig = {
