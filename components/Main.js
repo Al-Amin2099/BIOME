@@ -2,7 +2,7 @@
 
 import React, { Component } from 'react'
 import {View, Text} from 'react-native'
-import { createBottomTabNavigator } from '@react-navigation/bottom-tabs';
+import { createMaterialBottomTabNavigator } from '@react-navigation/material-bottom-tabs';
 import MaterialComunityIcons from 'react-native-vector-icons/MaterialCommunityIcons'
 
 // in order access fetch user function
@@ -13,12 +13,14 @@ import {bindActionCreators, bindActionCreatos} from 'redux'
 import {fetchUser} from '../redux/Actions/index'
 
 import FeedScreen from './main/Feed'
-import AddScreen from './main/Add'
 import ProfileScreen from './main/Profile'
  
 // ------------------------------------------------------------------------------------
 
-const Tab = createBottomTabNavigator();
+const Tab = createMaterialBottomTabNavigator();
+const EmptyScreen = () => {
+    return(null)
+}
 
 export class Main extends Component {
     componentDidMount(){
@@ -26,7 +28,7 @@ export class Main extends Component {
     }
     render() {
         return (
-            <Tab.Navigator>
+            <Tab.Navigator initialRouteName = "Feed" labeled = {false}>
                 <Tab.Screen name = "Feed" component = {FeedScreen} 
                     options = {{
                         tabBarIcon: ({color, size}) => (
@@ -34,7 +36,15 @@ export class Main extends Component {
                         )
                     }}
                 />
-                <Tab.Screen name = "Add" component = {AddScreen} 
+                <Tab.Screen name = "AddContainer" component = {EmptyScreen} 
+                    // listeners openup other screens
+                    listeners = {({navigation}) => ({
+                        tabPress: event => {
+                            // prevents default action from occuring
+                            event.preventDefault();
+                            navigation.navigate("Add")
+                        }
+                    })}
                     options = {{
                         tabBarIcon: ({color, size}) => (
                             <MaterialComunityIcons name = "plus-thick" color = {color} size = {26}/>
