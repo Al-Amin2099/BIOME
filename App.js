@@ -60,13 +60,13 @@ export class App extends Component {
       if(!user){
         this.setState({
           loggedIn: false,
-          loaded: true,
+          loaded: true
         })
       }
       else {
         this.setState({
           loggedIn: true,
-          loaded: true,
+          loaded: true
         })
       }
     })
@@ -86,15 +86,11 @@ export class App extends Component {
     if(!loggedIn) {
       return (
         // navigation container - parent tag for all routes
-        <NavigationContainer> {} 
-    
+        <NavigationContainer> 
           <Stack.Navigator initialRouteName = "Landing">
-    
             <Stack.Screen name = "Landing" component = {LandingScreen} options = {{headerShown: false}} />
             <Stack.Screen name = "Register" component = {RegisterScreen} options = {{headerShown: false}} />
-    
           </Stack.Navigator>
-    
         </NavigationContainer>
         
       );
@@ -102,7 +98,11 @@ export class App extends Component {
 
     return(
       <Provider store = {store}>
-        <MainScreen/>
+        <NavigationContainer>
+          <Stack.Navigator initialRouteName = "Main">
+            <Stack.Screen name = "Main" component = {MainScreen} options = {{headerShown: false}} />
+          </Stack.Navigator>
+        </NavigationContainer>
       </Provider>
     )
 
