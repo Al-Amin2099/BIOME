@@ -70,3 +70,6 @@ const mapStateToProps = (store) => ({
 const mapDispatchProps = (dispatch) => bindActionCreators({fetchUser}, dispatch)
 
 export default connect(mapStateToProps, mapDispatchProps)(Main);
+
+
+// addin camera and image gallery functionality
