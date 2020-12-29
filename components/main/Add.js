@@ -1,31 +1,42 @@
 // Adds pictures to your profile
 
 import React, { useState, useEffect } from 'react';
-import { StyleSheet, Text, View, Button } from 'react-native';
-import { Camera } from 'expo-camera';
+import {StyleSheet, Text, View, Button, Image} from 'react-native';
+import {Camera} from 'expo-camera';
 
-export default function App() {
+export default function Add() {
   const [hasPermission, setHasPermission] = useState(null);
+  const [camera, setCamera] = useState(null);
+  const [image, setImage] = useState(null);
   const [type, setType] = useState(Camera.Constants.Type.back);
 
   useEffect(() => {
     (async () => {
-      const { status } = await Camera.requestPermissionsAsync();
+      const {status} = await Camera.requestPermissionsAsync();
       setHasPermission(status === 'granted');
     })();
   }, []);
+
+  const takePicture = async() => {
+      // to take a picture, first access camera
+      if(camera){ // if camera exists and is populated with something
+        const data = await camera.takePictureAsync(null);
+        setImage(data.uri)
+      }
+  }
 
   if (hasPermission === null) {
     return <View />;
   }
   if (hasPermission === false) {
-    return <Text>No access to camera</Text>;
+    return <Text> No access to camera </Text>;
   }
 
   return (
     <View style = {{flex: 1}}>
         <View style = {styles.cameraContainer}>
             <Camera 
+                ref = {ref => setCamera(ref)}
                 style = {styles.fixedRatio} 
                 type = {type} 
                 ratio = {'1:1'}/>
@@ -42,6 +53,8 @@ export default function App() {
                 );
             }}>
         </Button>
+        <Button title = "Take Picture" onPress = {() => takePicture()}/>
+        {image && <Image source = {{ur: image}} />} 
     </View>
 
   );

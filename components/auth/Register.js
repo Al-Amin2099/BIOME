@@ -11,7 +11,6 @@ export class Register extends Component {
     // initialize components
     constructor(props){
         super(props);
-
         this.state = {
             // parameters needed for new users to register
             email : '',
@@ -33,12 +32,13 @@ export class Register extends Component {
                 // create user in firebase firestore database
                 firebase.firestore().collection("Users")
                     .doc(firebase.auth().currentUser.uid)
-                    .set({name, email})
-
+                    .set({
+                        name, 
+                        email})
                 console.log(result)
             })
             .catch((error) => {
-                console.log(result)
+                console.log(error)
             })
     }
 
@@ -46,7 +46,6 @@ export class Register extends Component {
     render() {
         return (
             <View>
-                
                 <TextInput 
                     placeholder = "name"
                     onChangeText = {(name) => this.setState({name})}
@@ -64,9 +63,7 @@ export class Register extends Component {
                 <Button 
                     onPress = {() => this.onSignUp()}
                     title = "Sign Up"
-                
                 />
-
             </View>
         )
     }

@@ -9,8 +9,8 @@ import MaterialComunityIcons from 'react-native-vector-icons/MaterialCommunityIc
 // connect allows us to connect to redux
 import {connect} from 'react-redux'
 // need to bind our actions to these components
-import {bindActionCreators, bindActionCreatos} from 'redux'
-import {fetchUser} from '../redux/Actions/index'
+import {bindActionCreators} from 'redux'
+import {fetchUser} from '../redux/actions/index'
 
 import FeedScreen from './main/Feed'
 import ProfileScreen from './main/Profile'
@@ -18,6 +18,7 @@ import ProfileScreen from './main/Profile'
 // ------------------------------------------------------------------------------------
 
 const Tab = createMaterialBottomTabNavigator();
+
 const EmptyScreen = () => {
     return(null)
 }
@@ -70,6 +71,3 @@ const mapStateToProps = (store) => ({
 const mapDispatchProps = (dispatch) => bindActionCreators({fetchUser}, dispatch)
 
 export default connect(mapStateToProps, mapDispatchProps)(Main);
-
-
-// addin camera and image gallery functionality

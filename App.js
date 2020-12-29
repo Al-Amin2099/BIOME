@@ -10,7 +10,8 @@ import LandingScreen from './components/auth/LandingPage'
 import RegisterScreen from './components/auth/Register'
 
 // imports packages and fucntions from firebase
-import * as firebase from 'firebase'
+import * as firebase from 'firebase';
+import 'firebase/firestore';
 
 // importing redux and everything that requires redux
 import {Provider} from 'react-redux'
