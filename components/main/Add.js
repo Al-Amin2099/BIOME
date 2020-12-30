@@ -3,17 +3,25 @@
 import React, { useState, useEffect } from 'react';
 import {StyleSheet, Text, View, Button, Image} from 'react-native';
 import {Camera} from 'expo-camera';
+import * as ImagePicker from 'expo-image-picker';
+
+// ------------------------------------------------------------------------------------
 
 export default function Add() {
-  const [hasPermission, setHasPermission] = useState(null);
+  const [hasCameraPermission, setHasCameraPermission] = useState(null);
+  const [hasGalleryPermission, setHasGalleryPermission] = useState(null);
   const [camera, setCamera] = useState(null);
   const [image, setImage] = useState(null);
   const [type, setType] = useState(Camera.Constants.Type.back);
 
   useEffect(() => {
     (async () => {
-      const {status} = await Camera.requestPermissionsAsync();
-      setHasPermission(status === 'granted');
+        const cameraStatus = await Camera.requestPermissionsAsync();
+        setHasCameraPermission(cameraStatus.status === 'granted');
+    
+        const galleryStatus = await ImagePicker.requestCameraRollPermissionsAsync();
+        setHasGalleryPermission(galleryStatus.status === 'granted');
+
     })();
   }, []);
 
@@ -21,17 +29,30 @@ export default function Add() {
       // to take a picture, first access camera
       if(camera){ // if camera exists and is populated with something
         const data = await camera.takePictureAsync(null);
-        setImage(data.uri)
+        setImage(data.uri);
       }
   }
 
-  if (hasPermission === null) {
-    return <View />;
+  const pickImage = async () => {
+    let result = await ImagePicker.launchImageLibraryAsync({
+      mediaTypes: ImagePicker.MediaTypeOptions.Images, // might need to change, but keeping it simply
+      allowsEditing: true,
+      aspect: [1, 1],
+      quality: 1,
+    });
+    console.log(result);
+
+    if (!result.cancelled) {
+      setImage(result.uri);
+    }
+  };
+
+  if (hasCameraPermission === null || hasGalleryPermission === false) {
+    return <View/>;
   }
-  if (hasPermission === false) {
+  if (hasCameraPermission === false || hasGalleryPermission === false) {
     return <Text> No access to camera </Text>;
   }
-
   return (
     <View style = {{flex: 1}}>
         <View style = {styles.cameraContainer}>
@@ -54,7 +75,8 @@ export default function Add() {
             }}>
         </Button>
         <Button title = "Take Picture" onPress = {() => takePicture()}/>
-        {image && <Image source = {{ur: image}} />} 
+        <Button title = "Gallery" onPress = {() => pickImage()} />
+        {image && <Image source = {{ur: image}} style = {{flex: 1}} />} 
     </View>
 
   );
