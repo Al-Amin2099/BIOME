@@ -76,7 +76,7 @@ export default function Add() {
         </Button>
         <Button title = "Take Picture" onPress = {() => takePicture()}/>
         <Button title = "Gallery" onPress = {() => pickImage()} />
-        {image && <Image source = {{ur: image}} style = {{flex: 1}} />} 
+        {image && <Image source = {{uri: image}} style = {{flex: 1}} />} 
     </View>
 
   );
