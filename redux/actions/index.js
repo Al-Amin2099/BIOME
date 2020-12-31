@@ -1,8 +1,6 @@
 // making a call to fetch user, call user, and save posts
 import firebase from 'firebase'
 import {USER_STATE_CHANGE, USER_POSTS_STATE_CHANGE} from '../constants/index'
-
-import firebase from 'firebase'
 import {SnapshotViewIOSCOmponent} from 'react-native'
 require('firebase/firestore')
 
