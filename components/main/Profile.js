@@ -11,8 +11,8 @@ function Profile(props) {
     return (
         <View style = {styles.container}>
             <View styles = {styles.containerInfo}>
-                <Text> {user.name} </Text>
-                <Text> {user.email} </Text>
+                <Text> currentUser.name </Text>
+                <Text> currentUser.email </Text>
             </View>
 
             <View styles = {styles.containerGallery}>
@@ -47,7 +47,7 @@ const styles = StyleSheet.create({
         flex: 1
     },
     containerImage: {
-        flex: 1/3
+        flex: 1
     },
     image: {
         flex: 1,

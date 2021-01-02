@@ -11,11 +11,9 @@ require("firebase/firebase-storage")
 // ------------------------------------------------------------------------------------
 
 export default function Save(props, {navigation}) {
-    console.log(props.route.params.image)
-
     const [caption, setCaption] = useState("")
 
-    const childPath = `Posts/${firebase.auth().currentUser.uid}/${Math.random().toString(36)}`
+    const childPath = `Posts/${firebase.auth().currentUser.uid}/${Math.random().toString(36)}`;
 
     const uploadImage = async () => {
         const uri = props.route.params.image;

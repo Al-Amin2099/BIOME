@@ -37,12 +37,9 @@ export function fetchUserPosts() {
                     // of posts
                     const data = doc.data();
                     const dataID = doc.id;
-                    return {
-                        dataID, 
-                        ...data
-                    }
+                    return {dataID, ...data}
                 })
-                dispatch({type: USER_POSTS_STATE_CHANGE, posts})
+                dispatch({type: USER_POSTS_STATE_CHANGE, Posts}) // posts => Posts
             })
     })
 }
