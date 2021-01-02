@@ -11,8 +11,8 @@ function Profile(props) {
     return (
         <View style = {styles.container}>
             <View styles = {styles.containerInfo}>
-                <Text> {currentUser.name} </Text>
-                <Text> {currentUser.email} </Text>
+                <Text> {user.name} </Text>
+                <Text> {user.email} </Text>
             </View>
 
             <View styles = {styles.containerGallery}>
