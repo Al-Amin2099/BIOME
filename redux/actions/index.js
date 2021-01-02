@@ -36,10 +36,10 @@ export function fetchUserPosts() {
                     // map function will iterate through all docs in the snapshot and build an array
                     // of posts
                     const data = doc.data();
-                    const dataID = doc.id;
-                    return {dataID, ...data}
+                    const id = doc.id;
+                    return {id, ...data}
                 })
-                dispatch({type: USER_POSTS_STATE_CHANGE, Posts}) // posts => Posts
+                dispatch({type: USER_POSTS_STATE_CHANGE, posts}) 
             })
     })
 }

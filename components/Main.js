@@ -1,9 +1,10 @@
 // main.js will be the file thats called after landing, login, and register
 
 import React, { Component } from 'react'
-import {View, Text} from 'react-native'
 import { createMaterialBottomTabNavigator } from '@react-navigation/material-bottom-tabs';
 import MaterialComunityIcons from 'react-native-vector-icons/MaterialCommunityIcons'
+
+import firebase from 'firebase'
 
 // in order access fetch user function
 // connect allows us to connect to redux
@@ -14,6 +15,7 @@ import {fetchUser} from '../redux/actions/index'
 
 import FeedScreen from './main/Feed'
 import ProfileScreen from './main/Profile'
+import SearchScreen from './main/Search'
  
 // ------------------------------------------------------------------------------------
 
@@ -34,7 +36,14 @@ export class Main extends Component {
                     options = {{
                         tabBarIcon: ({color, size}) => (
                             <MaterialComunityIcons name = "home" color = {color} size = {26}/>
-                        )
+                        ),
+                    }}
+                />
+                <Tab.Screen name = "Search" component = {SearchScreen} navigation = {this.props.navigation}
+                    options = {{
+                        tabBarIcon: ({color, size}) => (
+                            <MaterialComunityIcons name = "magnify" color = {color} size = {26}/>
+                        ),
                     }}
                 />
                 <Tab.Screen name = "AddContainer" component = {EmptyScreen} 
@@ -49,14 +58,22 @@ export class Main extends Component {
                     options = {{
                         tabBarIcon: ({color, size}) => (
                             <MaterialComunityIcons name = "plus-thick" color = {color} size = {26}/>
-                        )
+                        ),
                     }}
                 />
                 <Tab.Screen name = "Profile" component= {ProfileScreen} 
+                    listeners = {({navigation}) => ({
+                        tabPress: event => {
+                            // prevents default action from occuring
+                            event.preventDefault();
+                            navigation.navigate("Profile", {uid: firebase.auth().currentUser.uid})
+                        }
+                    })}
+
                     options = {{
                         tabBarIcon: ({color, size}) => (
                             <MaterialComunityIcons name = "account-circle" color = {color} size = {26}/>
-                        )
+                        ),
                     }}
                 />
 

@@ -45,7 +45,7 @@ export default function Save(props, {navigation}) {
 
     const savePostData = (downloadURL) => {
         firebase.firestore()
-            .collection('Posts')
+            .collection("Posts")
             .doc(firebase.auth().currentUser.uid)
             .collection("userPosts")
             .add({

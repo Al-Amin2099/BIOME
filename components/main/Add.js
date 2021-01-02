@@ -7,7 +7,8 @@ import * as ImagePicker from 'expo-image-picker';
 
 // ------------------------------------------------------------------------------------
 
-export default function Add({navigation}) {
+export default function Add ({navigation}) {
+  
   const [hasCameraPermission, setHasCameraPermission] = useState(null);
   const [hasGalleryPermission, setHasGalleryPermission] = useState(null);
   const [camera, setCamera] = useState(null);
@@ -19,7 +20,7 @@ export default function Add({navigation}) {
         const cameraStatus = await Camera.requestPermissionsAsync();
         setHasCameraPermission(cameraStatus.status === 'granted');
     
-        const galleryStatus = await ImagePicker.requestCameraRollPermissionsAsync();
+        const galleryStatus = await ImagePicker.requestMediaLibraryPermissionsAsync();
         setHasGalleryPermission(galleryStatus.status === 'granted');
 
     })();
@@ -76,7 +77,7 @@ export default function Add({navigation}) {
         </Button>
         <Button title = "Take Picture" onPress = {() => takePicture()}/>
         <Button title = "Gallery" onPress = {() => pickImage()} />
-        <Button title = "Save" onPress={() => navigation.navigate('Save',{image})} />
+        <Button title = "Save" onPress={() => navigation.navigate('Save',{image})}/>
         {image && <Image source = {{uri: image}} style = {{flex: 1}} />} 
     </View>
 
