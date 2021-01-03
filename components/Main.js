@@ -11,7 +11,7 @@ import firebase from 'firebase'
 import {connect} from 'react-redux'
 // need to bind our actions to these components
 import {bindActionCreators} from 'redux'
-import {fetchUser, fetchUserPosts, fetchUserFollowing} from '../redux/actions/index'
+import {fetchUser, fetchUserPosts, fetchUserFollowing, clearData} from '../redux/actions/index'
 
 import FeedScreen from './main/Feed'
 import ProfileScreen from './main/Profile'
@@ -28,6 +28,7 @@ const EmptyScreen = () => {
 
 export class Main extends Component {
     componentDidMount(){
+        this.props.clearData();
         this.props.fetchUser();
         this.props.fetchUserPosts();
         this.props.fetchUserFollowing();
@@ -88,6 +89,6 @@ export class Main extends Component {
 const mapStateToProps = (store) => ({
     currentUser: store.userState.currentUser
 })
-const mapDispatchProps = (dispatch) => bindActionCreators({fetchUser, fetchUserPosts, fetchUserFollowing}, dispatch);
+const mapDispatchProps = (dispatch) => bindActionCreators({fetchUser, fetchUserPosts, fetchUserFollowing, clearData}, dispatch);
 
 export default connect(mapStateToProps, mapDispatchProps)(Main);

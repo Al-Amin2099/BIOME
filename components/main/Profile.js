@@ -81,6 +81,12 @@ function Profile(props) {
         .delete({})
     }
 
+    // logout function logs users out of their account
+    const onLogout = () => {
+        firebase.auth().signOut();
+        // user gets signed out and session token gets destroyed
+    }
+
     if(user === null)
     {
         return <View/>
@@ -107,7 +113,11 @@ function Profile(props) {
                             />
                         )}
                     </View>
-                ) : null }
+                ) :  
+                <Button
+                    title = "Logout"
+                    onPress = {() => onLogout()}
+                /> }
 
             </View>
 
@@ -156,3 +166,5 @@ const mapStateToProps = (store) => ({
 })
 
 export default connect(mapStateToProps, null)(Profile);
+
+// adding logout function

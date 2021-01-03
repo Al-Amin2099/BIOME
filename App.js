@@ -63,13 +63,13 @@ export class App extends Component {
       if(!user){
         this.setState({
           loggedIn: false,
-          loaded: true
+          loaded: true,
         })
       }
       else {
         this.setState({
           loggedIn: true,
-          loaded: true
+          loaded: true,
         })
       }
     })
