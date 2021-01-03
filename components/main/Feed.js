@@ -22,7 +22,7 @@ function Feed(props) {
                 }
             }
 
-            posts.sort(function(x,y) {
+            posts.sort(function(x, y) {
                 return x.creation - y.creation;
             })
 

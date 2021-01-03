@@ -8,7 +8,7 @@ import firebase from 'firebase'
 
 // -------------------------------------------------------------------------------------------
 
-export class Register extends Component {
+export class Login extends Component {
     // initialize components
     constructor(props){
         super(props);
@@ -26,14 +26,14 @@ export class Register extends Component {
     onSignUp(){
 
         // grabs variables in state variable 
-        const {email, password, name} = this.state;
+        const {email, password} = this.state;
         firebase.auth().signInWithEmailAndPassword(email, password)
             // after getting response from firebase server
             .then((result) => {
                 console.log(result)
             })
             .catch((error) => {
-                console.log(result)
+                console.log(error)
             })
     }
 
@@ -41,11 +41,6 @@ export class Register extends Component {
     render() {
         return (
             <View>
-                
-                <TextInput 
-                    placeholder = "name"
-                    onChangeText = {(name) => this.setState({name})}
-                />
                 <TextInput 
                     placeholder = "email"
                     onChangeText = {(email) => this.setState({email})}
@@ -58,7 +53,7 @@ export class Register extends Component {
 
                 <Button 
                     onPress = {() => this.onSignUp()}
-                    title = "Sign Up"
+                    title = "Sign In"
                 
                 />
 

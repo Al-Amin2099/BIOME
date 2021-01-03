@@ -18,6 +18,8 @@ import thunk from 'redux-thunk'
 
 import LandingScreen from './components/auth/LandingPage'
 import RegisterScreen from './components/auth/Register'
+import LoginScreen from './components/auth/Login'
+
 import MainScreen from './components/Main'
 import AddScreen from './components/main/Add'
 import SaveScreen from './components/main/Save'
@@ -93,6 +95,7 @@ export class App extends Component {
           <Stack.Navigator initialRouteName = "Landing">
             <Stack.Screen name = "Landing" component = {LandingScreen} options = {{headerShown: false}} />
             <Stack.Screen name = "Register" component = {RegisterScreen} options = {{headerShown: false}} />
+            <Stack.Screen name = "Login" component = {LoginScreen} options = {{headerShown: false}} />
           </Stack.Navigator>
         </NavigationContainer>
         

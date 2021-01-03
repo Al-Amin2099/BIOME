@@ -1,8 +1,9 @@
 // making a call to fetch user, call user, and save posts
 import firebase from 'firebase'
+require('firebase/firestore')
+
 import {USER_STATE_CHANGE, USER_POSTS_STATE_CHANGE, USER_FOLLOWING_STATE_CHANGE, USERS_DATA_STATE_CHANGE, USERS_POSTS_STATE_CHANGE, CLEAR_DATA} from '../constants/index'
 import {SnapshotViewIOSCOmponent} from 'react-native'
-require('firebase/firestore')
 
 // ------------------------------------------------------------------------------------
 
@@ -63,7 +64,7 @@ export function fetchUserFollowing() {
                     return id
                 })
                 dispatch({type: USER_FOLLOWING_STATE_CHANGE, following});
-                for (let i = 0; y < following.length; i++){
+                for (let i = 0; i < following.length; i++){
                     dispatch(fetchUsersData(followingA[i]));
                 }
             })
@@ -109,7 +110,7 @@ export function fetchUsersFollowingPosts(uid) {
                 // this way gets the uid of the user even after the value changes after accessing the database
                 const uid = snapshot.query.EP.path.segments[1]
                 console.log({snapshot, uid})
-                const user = getState().usersState.users.find(el => el.uid === uid);
+                const user = getState().userState.users.find(el => el.uid === uid);
 
                 let posts = snapshot.docs.map(doc => {
                     // map function will iterate through all docs in the snapshot and build an array
