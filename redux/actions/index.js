@@ -4,6 +4,7 @@ require('firebase/firestore')
 
 import {USER_STATE_CHANGE, USER_POSTS_STATE_CHANGE, USER_FOLLOWING_STATE_CHANGE, USERS_DATA_STATE_CHANGE, USERS_POSTS_STATE_CHANGE, CLEAR_DATA} from '../constants/index'
 import {SnapshotViewIOSCOmponent} from 'react-native'
+require('firebase/firestore')
 
 // ------------------------------------------------------------------------------------
 
@@ -65,13 +66,13 @@ export function fetchUserFollowing() {
                 })
                 dispatch({type: USER_FOLLOWING_STATE_CHANGE, following});
                 for (let i = 0; i < following.length; i++){
-                    dispatch(fetchUsersData(followingA[i]));
+                    dispatch(fetchUsersData(followingA[i], true));
                 }
             })
     })
 }
 
-export function fetchUsersData(uid) {
+export function fetchUsersData(uid, getPosts) {
     return((dispatch, getState) => {
         const found = getState().usersState.users.some(el => el.uid=== uid);
 
@@ -86,12 +87,14 @@ export function fetchUsersData(uid) {
                     user.uid = snapshot.id;
 
                     dispatch({type: USERS_DATA_STATE_CHANGE, user})
-                    dispatch(fetchUsersFollowingPosts(user.id));
                 }
                 else {
                     console.log("Does Not Exist")
                 }
             })
+            if(getPosts){
+                dispatch(fetchUsersFollowingPosts(uid));
+            }
         }
 
     })

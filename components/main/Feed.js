@@ -1,10 +1,9 @@
 import React, {useState, useEffect} from 'react'
 import {StyleSheet, View, Text, Image, FlatList, Button} from 'react-native'
 
-import {connect} from 'react-redux'
-
 import firebase from 'firebase'
 require ('firebase/firestore')
+import {connect} from 'react-redux'
 
 // ------------------------------------------------------------------------------------
 
@@ -14,7 +13,7 @@ function Feed(props) {
 
     useEffect(() => {
         let posts = [];
-        if(props.usersLoaded == props.following.length) {
+        if(props.usersFollowingLoaded == props.following.length) {
             for (let i = 0; i < props.following.length; i++){
                 const user = getState().props.users.find(el => el.uid === props.following[i]);
                 if(user != imdefomed) {
@@ -29,7 +28,7 @@ function Feed(props) {
             setPosts(posts)
         }
 
-    }, [props.usersLoaded])
+    }, [props.usersFollowingLoaded])
 
     return (
         <View style = {styles.container}>
@@ -79,8 +78,9 @@ const styles = StyleSheet.create({
 const mapStateToProps = (store) => ({
     currentUser: store.userState.currentUser,
     following: store.userState.following,
-    users: store.userState.users,
-    usersLoaded: store.userState.users,
+    feed: store.userState.feed,
+    usersFollowingLoaded: store.userState.users,
 })
 
 export default connect(mapStateToProps, null)(Feed);
+

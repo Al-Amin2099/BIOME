@@ -45,7 +45,7 @@ export class Register extends Component {
     // render is called anytime a state component changes, or component loads
     render() {
         return (
-            <View>
+            <View style = {{flex: 1, justifyContent: 'center'}}>
                 <TextInput 
                     placeholder = "name"
                     onChangeText = {(name) => this.setState({name})}

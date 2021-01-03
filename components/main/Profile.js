@@ -126,7 +126,7 @@ function Profile(props) {
                     numColumns = {3}
                     horizontal = {false} // will be a vertical scroll view
                     data = {userPosts}
-                    renderItem = {({item}) => (
+                    renderItem = {({ item }) => (
                         <View style = {styles.containerImage}>
                             <Image
                                 style = {styles.image}
