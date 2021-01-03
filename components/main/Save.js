@@ -10,20 +10,21 @@ require("firebase/firebase-storage")
 
 // ------------------------------------------------------------------------------------
 
-export default function Save(props, {navigation}) {
+export default function Save(props) {
     const [caption, setCaption] = useState("")
-
-    const childPath = `Posts/${firebase.auth().currentUser.uid}/${Math.random().toString(36)}`;
 
     const uploadImage = async () => {
         const uri = props.route.params.image;
+        const childPath = `Posts/${firebase.auth().currentUser.uid}/${Math.random().toString(36)}`;
+        console.log(childPath)
         const response = await fetch(uri);
         const blob = await response.blob();
+        
         const task = firebase
             .storage()
             .ref()
             .child(childPath)
-            .put(blob)
+            .put(blob);
 
         const taskProgress = snapshot => {
             console.log(`transferred: ${snapshot.bytesTransferred}`)
@@ -45,7 +46,7 @@ export default function Save(props, {navigation}) {
 
     const savePostData = (downloadURL) => {
         firebase.firestore()
-            .collection("Posts")
+            .collection('Posts')
             .doc(firebase.auth().currentUser.uid)
             .collection("userPosts")
             .add({

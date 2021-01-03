@@ -61,7 +61,7 @@ export default function Add ({navigation}) {
                 ref = {ref => setCamera(ref)}
                 style = {styles.fixedRatio} 
                 type = {type} 
-                ratio = {'1:1'}/>
+                ratio = {'1:1'} />
         </View>
 
         <Button
@@ -69,16 +69,18 @@ export default function Add ({navigation}) {
             onPress = {() => {
                 setType(
                     // changes which camera is being used (front / back)
-                    type === Camera.Constants.Type.back
+                  type === Camera.Constants.Type.back
                     ? Camera.Constants.Type.front
                     : Camera.Constants.Type.back
                 );
             }}>
         </Button>
+
         <Button title = "Take Picture" onPress = {() => takePicture()}/>
         <Button title = "Gallery" onPress = {() => pickImage()} />
-        <Button title = "Save" onPress={() => navigation.navigate('Save',{image})}/>
+        <Button title = "Save" onPress={() => navigation.navigate("Save",{image})}/>
         {image && <Image source = {{uri: image}} style = {{flex: 1}} />} 
+
     </View>
 
   );

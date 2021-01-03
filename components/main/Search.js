@@ -38,8 +38,7 @@ export default function Search (props) {
                 horizontal = {false}
                 data = {users}
                 renderItem = {({item}) => (
-                    <TouchableOpacity
-                        onPres = {() => props.navigation.navigate("Profile", {uid: item.id})}>
+                    <TouchableOpacity onPres = {() => props.navigation.navigate("Profile", {uid: item.id})}>
                         <Text> {item.name} </Text>
                     </TouchableOpacity>
                 )} // renders out every item and navigates to that profile page

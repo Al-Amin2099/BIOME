@@ -1,5 +1,5 @@
 import React, {useState, useEffect} from 'react'
-import {StyleSheet, View, Text, Image, FlatList} from 'react-native'
+import {StyleSheet, View, Text, Image, FlatList, Button} from 'react-native'
 
 import {connect} from 'react-redux'
 
@@ -12,6 +12,7 @@ function Profile(props) {
 
     const [userPosts, setUserPosts] = useState([]);
     const [user, setUser] = useState([null]);
+    const [following, setFollowing] = useState(false)
 
     useEffect(() => {
         const {currentUser, posts} = props;
@@ -23,7 +24,7 @@ function Profile(props) {
         }
         else {
             firebase.firestore()
-                .collection("User")
+                .collection("Users")
                 .doc(props.route.params.uid)
                 .get()
                 .then((snapshot) => {
@@ -51,17 +52,63 @@ function Profile(props) {
                     setUserPosts(posts)
                 })
         }
-    }, [props.route.params.uid])
+
+        if(props.following.indexOf(props.route.params.uid) > -1) {
+            setFollowing(true);
+        }
+        else {
+            setFollowing(false);
+        }
+
+    }, [props.route.params.uid, props.following])
+
+    // following a user function
+    const onFollow = () => {
+        firebase.firestore()
+        .collection("Following")
+        .doc(firebase.auth().currentUser.uid)
+        .collection("userFollowing")
+        .doc(props.route.params.uid)
+        .set({})
+    }
+    // unfollow a user function
+    const onUnfollow = () => {
+        firebase.firestore()
+        .collection("Following")
+        .doc(firebase.auth().currentUser.uid)
+        .collection("userFollowing")
+        .doc(props.route.params.uid)
+        .delete({})
+    }
 
     if(user === null)
     {
         return <View/>
     }
+
     return (
         <View style = {styles.container}>
             <View styles = {styles.containerInfo}>
                 <Text> {user.name} </Text> 
                 <Text> {user.email} </Text>
+
+                {props.route.params.uid !== firebase.auth().currentUser.uid ? (
+                    <View>
+                        {following ? (
+                            <Button
+                                title = "Following"
+                                onPress = {() => onUnfollow()}
+                            />
+                        ) : 
+                        (
+                            <Button
+                                title = "Follow"
+                                onPress = {() => onFollow()}
+                            />
+                        )}
+                    </View>
+                ) : null }
+
             </View>
 
             <View styles = {styles.containerGallery}>
@@ -70,8 +117,7 @@ function Profile(props) {
                     horizontal = {false} // will be a vertical scroll view
                     data = {userPosts}
                     renderItem = {({item}) => (
-                        <View>
-                            style = {styles.containerImage}
+                        <View style = {styles.containerImage}>
                             <Image
                                 style = {styles.image}
                                 source = {{uri: item.downloadURL}}
@@ -105,7 +151,8 @@ const styles = StyleSheet.create({
 
 const mapStateToProps = (store) => ({
     currentUser: store.userState.currentUser,
-    posts: store.userState.posts
+    posts: store.userState.posts,
+    following: store.userState.following
 })
 
 export default connect(mapStateToProps, null)(Profile);

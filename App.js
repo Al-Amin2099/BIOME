@@ -6,9 +6,6 @@ import {Text, View} from 'react-native';
 import {NavigationContainer} from "@react-navigation/native"; 
 import {createStackNavigator} from "@react-navigation/stack"; 
 
-import LandingScreen from './components/auth/LandingPage'
-import RegisterScreen from './components/auth/Register'
-
 // imports packages and fucntions from firebase
 import * as firebase from 'firebase';
 import 'firebase/firestore';
@@ -19,6 +16,8 @@ import {createStore, applyMiddleware} from 'redux'
 import rootReducer from './redux/reducers'
 import thunk from 'redux-thunk'
 
+import LandingScreen from './components/auth/LandingPage'
+import RegisterScreen from './components/auth/Register'
 import MainScreen from './components/Main'
 import AddScreen from './components/main/Add'
 import SaveScreen from './components/main/Save'
