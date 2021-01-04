@@ -2,7 +2,7 @@
 import firebase from 'firebase'
 require('firebase/firestore')
 
-import {USER_STATE_CHANGE, USER_POSTS_STATE_CHANGE, USER_FOLLOWING_STATE_CHANGE, USERS_DATA_STATE_CHANGE, USERS_POSTS_STATE_CHANGE, CLEAR_DATA} from '../constants/index'
+import {USER_STATE_CHANGE, USER_POSTS_STATE_CHANGE, USER_FOLLOWING_STATE_CHANGE, USERS_DATA_STATE_CHANGE, USERS_POSTS_STATE_CHANGE, USERS_LIKES_STATE_CHANGE, CLEAR_DATA} from '../constants/index'
 import {SnapshotViewIOSCOmponent} from 'react-native'
 require('firebase/firestore')
 
@@ -111,8 +111,7 @@ export function fetchUsersFollowingPosts(uid) {
             .then((snapshot) => {
                 // value of uid gets lost due to asynchronus the moment you reach the callback function
                 // this way gets the uid of the user even after the value changes after accessing the database
-                const uid = snapshot.query.EP.path.segments[1]
-                console.log({snapshot, uid})
+                const uid = snapshot.query.EP.path.segments[1];
                 const user = getState().userState.users.find(el => el.uid === uid);
 
                 let posts = snapshot.docs.map(doc => {
@@ -122,7 +121,35 @@ export function fetchUsersFollowingPosts(uid) {
                     const id = doc.id;
                     return {id, ...data, user}
                 })
+
+                for(let i = 0; i < posts.length; i++){
+                    dispatch(fetchUsersFollowingLikes(uid, posts[i].id))
+                }
                 dispatch({type: USERS_POSTS_STATE_CHANGE, posts, uid}) 
+            })
+    })
+}
+
+export function fetchUsersFollowingLikes(uid, postId) {
+    return((dispatch, getState) => {
+        firebase.firestore()
+            .collection("Posts")
+            .doc(uid)
+            .collection("userPosts")
+            .doc(postId)
+            .collection("Likes")
+            .doc(firebase.auth().currentUser.uid)
+            .onSnapshot((snapshot) => {
+                // value of uid gets lost due to asynchronus the moment you reach the callback function
+                // this way gets the uid of the user even after the value changes after accessing the database
+                const postId = snapshot.ZE.path.segments[3];
+                
+                let currentUserLike = false;
+                if(snapshot.exists){
+                    currentUserLike = true;
+                }
+                
+                dispatch({type: USERS_LIKES_STATE_CHANGE, postId, currentUserLike}) 
             })
     })
 }
