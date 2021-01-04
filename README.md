@@ -1,2 +1,2 @@
 # BIOME
-![](assets/animation.gif)
+![](frontend/assets/animation.gif)
