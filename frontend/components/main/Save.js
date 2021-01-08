@@ -10,16 +10,17 @@ require("firebase/firebase-storage")
 
 // ------------------------------------------------------------------------------------
 
-export default function Save (props) {
+export default function Save(props) {
     const [caption, setCaption] = useState("")
 
     const uploadImage = async () => {
         const uri = props.route.params.image;
-        const childPath = `Posts/${firebase.auth().currentUser.uid}/${Math.random().toString(36)}`;
+        const childPath = `post/${firebase.auth().currentUser.uid}/${Math.random().toString(36)}`;
         console.log(childPath)
+
         const response = await fetch(uri);
         const blob = await response.blob();
-        
+
         const task = firebase
             .storage()
             .ref()
@@ -45,8 +46,9 @@ export default function Save (props) {
     }
 
     const savePostData = (downloadURL) => {
+
         firebase.firestore()
-            .collection("Posts")
+            .collection('posts')
             .doc(firebase.auth().currentUser.uid)
             .collection("userPosts")
             .add({
@@ -58,15 +60,15 @@ export default function Save (props) {
                 props.navigation.popToTop()
             }))
     }
-
     return (
-        <View style = {{flex: 1}}>
-            <Image source = {{uri: props.route.params.image}} />
-            <TextInput 
-                placeholder = "Enter Caption..."
-                onChangeText = {(caption) => setCaption(caption)}
+        <View style={{ flex: 1 }}>
+            <Image source={{ uri: props.route.params.image }} />
+            <TextInput
+                placeholder="Write a Caption . . ."
+                onChangeText={(caption) => setCaption(caption)}
             />
-            <Button title = "Save" onPress = {() => uploadImage()} />
+
+            <Button title="Save" onPress={() => uploadImage()} />
         </View>
     )
 }

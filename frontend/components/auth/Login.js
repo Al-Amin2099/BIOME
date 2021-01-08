@@ -40,7 +40,7 @@ export class Login extends Component {
     // render is called anytime a state component changes, or component loads
     render() {
         return (
-            <View style =  {{flex: 1, justifyContent: 'center'}}>
+            <View>
                 <TextInput  
                     placeholder = "email"
                     onChangeText = {(email) => this.setState({email})}
