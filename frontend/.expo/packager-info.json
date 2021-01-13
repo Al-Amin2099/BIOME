@@ -1,10 +1,10 @@
 {
   "devToolsPort": 19003,
-  "expoServerPort": 19001,
+  "expoServerPort": null,
   "packagerPort": 19001,
-  "expoServerNgrokUrl": "https://c3-v62.tonyamin2520.frontend.exp.direct",
-  "packagerNgrokUrl": "https://packager.c3-v62.tonyamin2520.frontend.exp.direct",
-  "ngrokPid": 39823,
+  "expoServerNgrokUrl": null,
+  "packagerNgrokUrl": null,
+  "ngrokPid": null,
   "packagerPid": null,
   "webpackServerPort": null
 }
