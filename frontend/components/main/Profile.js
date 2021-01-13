@@ -78,7 +78,7 @@ function Profile(props) {
         .doc(firebase.auth().currentUser.uid)
         .collection("userFollowing")
         .doc(props.route.params.uid)
-        .delete({})
+        .delete()
     }
 
     // logout function logs users out of their account
@@ -102,7 +102,7 @@ function Profile(props) {
                     <View>
                         {following ? (
                             <Button
-                                title = "Following"
+                                title = "Unfollow"
                                 onPress = {() => onUnfollow()}
                             />
                         ) : 

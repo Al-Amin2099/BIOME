@@ -12,8 +12,8 @@ export default function Search (props) {
     
     const fetchUsers = (search) => {
         firebase.firestore()
-            .collection("Users")
-            .where("name", ">=", search) // will try to find documents from the user collection that is similar to what is searched
+            .collection('Users')
+            .where('name', '>=', search) // will try to find documents from the user collection that is similar to what is searched
             .get()
             .then((snapshot) => {
                 let users = snapshot.docs.map(doc => {
@@ -39,7 +39,7 @@ export default function Search (props) {
                 horizontal = {false}
                 data = {users}
                 renderItem = {({item}) => (
-                    <TouchableOpacity onPres = {() => props.navigation.navigate('Profile', {uid: item.id})} >
+                    <TouchableOpacity onPress = {() => props.navigation.navigate("Profile", {uid: item.id})} >
                         <Text> {item.name} </Text>
                     </TouchableOpacity>
                 )}

@@ -1,6 +1,6 @@
 import {StatusBar} from 'expo-status-bar';
 import React, {Component} from 'react';
-import {Text, View} from 'react-native';
+import {Text, View, StyleSheet} from 'react-native';
 
 // imports packages and fucntions from firebase
 import * as firebase from 'firebase';
@@ -24,6 +24,7 @@ import MainScreen from './components/Main'
 import AddScreen from './components/main/Add'
 import SaveScreen from './components/main/Save'
 import CommentsScreen from './components/main/Comments'
+import { ScreenStackHeaderCenterView } from 'react-native-screens';
 
 // -------------------------------------------------------------------------------------------
 
@@ -84,6 +85,10 @@ export class App extends Component {
       // overides navigation container
       return(
         <View style = {{flex: 1, justifyContent: 'center'}}>
+          <StatusBar
+            barStyle = 'light-content'
+            backgroundColor = '4f6d7a'  
+          /> 
           <Text> Loading </Text>
         </View>
       )
@@ -118,5 +123,25 @@ export class App extends Component {
 
   }
 }
+
+const styles = StyleSheet.create({
+  container: {
+    flex: 1,
+    justifyContent: 'center',
+    alignItems: 'center',
+    backgroundColor: '#4f6d7a'
+  },
+  welcome: {
+    fontSize: 20,
+    textAlign: 'center',
+    margin: 10
+  },
+  instructions: {
+    textAlign: 'center',
+    color: '#333333',
+    marginBottom: 5
+  }
+
+})
 
 export default App
