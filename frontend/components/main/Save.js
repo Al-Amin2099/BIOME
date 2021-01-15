@@ -61,14 +61,14 @@ export default function Save(props) {
             }))
     }
     return (
-        <View style={{ flex: 1 }}>
-            <Image source={{ uri: props.route.params.image }} />
+        <View style = {{ flex: 1 }} >
+            <Image source = {{ uri: props.route.params.image }} />
             <TextInput
-                placeholder="Write a Caption . . ."
-                onChangeText={(caption) => setCaption(caption)}
+                placeholder =  "Write a Caption ..."
+                onChangeText = {(caption) => setCaption(caption)}
             />
 
-            <Button title="Save" onPress={() => uploadImage()} />
+            <Button title= "Save" onPress={() => uploadImage()} />
         </View>
     )
 }

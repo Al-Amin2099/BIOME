@@ -62,19 +62,19 @@ function Feed(props) {
                                 (
                                     <Button 
                                         title = "Dislike"
-                                        onPress = {() => onDislikePress(item.user.uid, item.id)}
+                                        onPress = {() => onDislikePress(item.user.id, item.id)}
                                     />
                                 )
                                 :  
                                 (
                                     <Button 
                                         title = "Like"
-                                        onPress = {() => onLikePress(item.user.uid, item.id)}
+                                        onPress = {() => onLikePress(item.user.id, item.id)}
                                     />
                                 )
                             }
 
-                            <Text onPress = {() => props.navigation.navigate("Comment", {postId: item.id, uid: item.user.uid})}>  
+                            <Text onPress = {() => props.navigation.navigate("Comments", {postId: item.id, uid: item.user.uid})}>  
                                 View Comments... 
                             </Text>
                         </View>

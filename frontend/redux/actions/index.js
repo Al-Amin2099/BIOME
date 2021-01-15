@@ -1,8 +1,8 @@
 // making a call to fetch user, call user, and save posts
 
 import {USER_STATE_CHANGE, USER_POSTS_STATE_CHANGE, USER_FOLLOWING_STATE_CHANGE, USERS_DATA_STATE_CHANGE, USERS_POSTS_STATE_CHANGE, USERS_LIKES_STATE_CHANGE, CLEAR_DATA} from '../constants/index'
-// import {SnapshotViewIOSCOmponent} from 'react-native'
 import firebase from 'firebase'
+import {SnapshstViewIOSCOmponent} from 'react-native'
 require('firebase/firestore')
 
 // ------------------------------------------------------------------------------------
@@ -130,7 +130,7 @@ export function fetchUsersFollowingPosts(uid) {
 }
 
 export function fetchUsersFollowingLikes(uid, postId) {
-    return((dispatch) => {
+    return((dispatch, getState) => {
         firebase.firestore()
             .collection("Posts")
             .doc(uid)
@@ -148,7 +148,7 @@ export function fetchUsersFollowingLikes(uid, postId) {
                     currentUserLike = true;
                 }
                 
-                dispatch({type: USERS_LIKES_STATE_CHANGE, postId, currentUserLike}) 
+                dispatch({ type: USERS_LIKES_STATE_CHANGE, postId, currentUserLike }) 
             })
     })
 }

@@ -35,18 +35,18 @@ export class Main extends Component {
     }
     render() {
         return (
-            <Tab.Navigator initialRouteName = "Feed" labeled = {false}>
+            <Tab.Navigator initialRouteName = "Feed" labeled = {false} barStyle = {{ backgroundColor: '#2f4f4f' }} >
                 <Tab.Screen name = "Feed" component = {FeedScreen} 
                     options = {{
                         tabBarIcon: ({color, size}) => (
-                            <MaterialComunityIcons name = "home" color = {color} size = {26}/>
+                            <MaterialComunityIcons name = "home" color = {'#7fffd4'} size = {26}/>
                         ),
                     }}
                 />
                 <Tab.Screen name = "Search" component = {SearchScreen} navigation = {this.props.navigation}
                     options = {{
                         tabBarIcon: ({color, size}) => (
-                            <MaterialComunityIcons name = "magnify" color = {color} size = {26}/>
+                            <MaterialComunityIcons name = "magnify" color = {'#7fffd4'} size = {26}/>
                         ),
                     }}
                 />
@@ -61,7 +61,7 @@ export class Main extends Component {
                     })}
                     options = {{
                         tabBarIcon: ({color, size}) => (
-                            <MaterialComunityIcons name = "plus-thick" color = {color} size = {26}/>
+                            <MaterialComunityIcons name = "plus-thick" color = {'#7fffd4'} size = {26}/>
                         ),
                     }}
                 />
@@ -76,7 +76,7 @@ export class Main extends Component {
 
                     options = {{
                         tabBarIcon: ({color, size}) => (
-                            <MaterialComunityIcons name = "account-circle" color = {color} size = {26}/>
+                            <MaterialComunityIcons name = "account-circle" color = {'#7fffd4'} size = {26}/>
                         ),
                     }}
                 />
