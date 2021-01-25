@@ -27,6 +27,8 @@
     },
     "web": {
       "favicon": "./assets/favicon.png"
-    }
+    },
+    "description": "BIOME is an app that lets one share progress of their indoor plants.",
+    "githubUrl": "https://github.com/Al-Amin2099/BIOME"
   }
 }
